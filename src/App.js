@@ -10,14 +10,25 @@ class App extends Component{
     }
   }
 
+  handleGamePlay = (index) => {
+    const { square } = this.state
+    // 
+    
+  }
+
   render(){
+    console.log(this.state.squares)
     return(
       <>
         <h1>Tic Tac Toe</h1>
           <div className="gameBoard">
           { this.state.squares.map((value, index) => {
             return ( 
-              <Square />
+              <Square 
+                value={ value }
+                index={ index }
+                key={ index }
+                />
             )
           })}
         </div>
