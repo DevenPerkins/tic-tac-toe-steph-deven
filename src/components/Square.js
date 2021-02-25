@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class Square extends Component{
 
   handleClick = () => {
-    alert("hey it works!")
+    this.props.handleGamePlay(this.props.index)
   }
 
 
