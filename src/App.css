@@ -1,5 +1,20 @@
 .square{
-  height: 100px;
-  width: 100px;
+  display: grid;
+  height: 200px;
+  width: 200px;
+  /* border: 2px solid black; */
+  /* font-size: 100px;
+  text-align: center */
+  grid-template-columns: auto auto auto;
+}
+
+.gameBoard {
+  display: flex;
+  width: 620px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 0 auto;
   border: 2px solid black;
 }
+
+
