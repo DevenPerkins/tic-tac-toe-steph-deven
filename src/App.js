@@ -10,8 +10,7 @@ class App extends Component{
       history: [],
       x: "x",
       o: "o",
-      players: ["p1", "p2"],
-      currentPlayer: "p1"
+      currentPlayer: false
     }
   }
   
@@ -47,20 +46,20 @@ class App extends Component{
   }
 
   switchPlayer = () => {
-    const { currentPlayer } = this.state;
-    if(currentPlayer[0] === currentPlayer[1]){
-      currentPlayer = currentPlayer[0]
-    } else {
-      currentPlayer = currentPlayer[1]
+    var { currentPlayer } = this.state;
+    if(currentPlayer === false){
+      return currentPlayer = true
+    }else if (currentPlayer === true){
+      return currentPlayer = false
     }
-  }
+  } 
 
 
 
 
   handleGamePlay = (index) => {
     const { squares, currentPlayer } = this.state
-    if(currentPlayer === currentPlayer[0]){
+    if(currentPlayer === false){
       squares[index] = "❌"
       this.setState({squares: squares, currentPlayer: this.switchPlayer()})
     } else {
@@ -71,7 +70,7 @@ class App extends Component{
   }
 
   render(){
-    console.log(this.state.currentPlayer[0])
+    console.log("currentPlayer:", this.state.currentPlayer)
     console.log(this.state.squares);
     return(
       <>
