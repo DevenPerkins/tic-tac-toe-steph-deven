@@ -10,63 +10,67 @@ class App extends Component{
       history: [],
       x: "x",
       o: "o",
-      currentPlayer: false
+      currentPlayer: "p1"
     }
   }
   
   isWinX = () =>{
   const {squares , x} = this.state
   const winCombosX = [
-    [squares[0] === x  && squares[1] === x && squares[2] === x ],
-    [squares[3] === x  && squares[4] === x && squares[5] === x ],
-    [squares[6] === x  && squares[7] === x && squares[8] === x ],
+    [squares[0] === "❌"  && squares[1] === "❌" && squares[2] === "❌" ],
+    [squares[3] === "❌"  && squares[4] === "❌" && squares[5] === "❌" ],
+    [squares[6] === "❌"  && squares[7] === "❌" && squares[8] === "❌" ],
     
-    [squares[0] === x  && squares[3] === x && squares[6] === x ],
-    [squares[1] === x  && squares[4] === x && squares[7] === x ],
-    [squares[2] === x  && squares[5] === x && squares[8] === x ],
+    [squares[0] === "❌"  && squares[3] === "❌" && squares[6] === "❌" ],
+    [squares[1] === "❌"  && squares[4] === "❌" && squares[7] === "❌" ],
+    [squares[2] === "❌"  && squares[5] === "❌" && squares[8] === "❌" ],
 
-    [squares[0] === x  && squares[4] === x && squares[8] === x ],
-    [squares[2] === x  && squares[4] === x && squares[6] === x ],
+    [squares[0] === "❌"  && squares[4] === "❌" && squares[8] === "❌" ],
+    [squares[2] === "❌"  && squares[4] === "❌" && squares[6] === "❌" ],
     ]
   }
 
   isWinO = () => {
   const {squares , o } = this.state
   const winCombosO = [
-    [squares[0] === o  && squares[1] === o && squares[2] === o ],
-    [squares[3] === o  && squares[7] === o && squares[8] === o ],
+    [squares[0] === "🅾️"  && squares[1] === "🅾️" && squares[2] === "🅾️" ],
+    [squares[3] === "🅾️"  && squares[7] === "🅾️" && squares[8] === "🅾️" ],
     
-    [squares[0] === o  && squares[3] === o && squares[6] === o ],
-    [squares[1] === o  && squares[4] === o && squares[7] === o ],
-    [squares[2] === o  && squares[5] === o && squares[8] === o ],
+    [squares[0] === "🅾️"  && squares[3] === "🅾️" && squares[6] === "🅾️" ],
+    [squares[1] === "🅾️"  && squares[4] === "🅾️" && squares[7] === "🅾️" ],
+    [squares[2] === "🅾️"  && squares[5] === "🅾️" && squares[8] === "🅾️" ],
   
-    [squares[0] === o  && squares[4] === o && squares[8] === o ],
-    [squares[2] === o  && squares[4] === o && squares[6] === o ],
+    [squares[0] === "🅾️"  && squares[4] === "🅾️" && squares[8] === "🅾️" ],
+    [squares[2] === "🅾️"  && squares[4] === "🅾️" && squares[6] === "🅾️" ],
     ]
   }
 
   switchPlayer = () => {
     var { currentPlayer } = this.state;
-    if(currentPlayer === false){
-      return currentPlayer = true
-    }else if (currentPlayer === true){
-      return currentPlayer = false
+    if(currentPlayer === "p1"){
+      return currentPlayer = "p2"
+    }else if (currentPlayer === "p2"){
+      return currentPlayer = "p1"
     }
-  } 
+  }
 
 
 
 
   handleGamePlay = (index) => {
     const { squares, currentPlayer } = this.state
-    if(currentPlayer === false){
+    if(squares[index]=== null && currentPlayer === "p1"){
       squares[index] = "❌"
       this.setState({squares: squares, currentPlayer: this.switchPlayer()})
-    } else {
+    } else if (squares[index]=== null && currentPlayer === "p2"){
       squares[index] = "🅾️"
       this.setState({squares: squares, currentPlayer: this.switchPlayer()})
+    }else if(squares[index] === "❌" || squares[index] === "🅾️" ){
+      alert("NO!")
     }
-    
+    if(squares === this.isWinO){
+      alert("p2 wins")
+    }
   }
 
   render(){
