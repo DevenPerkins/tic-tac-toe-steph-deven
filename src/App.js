@@ -47,23 +47,14 @@ class App extends Component{
     var { currentPlayer } = this.state;
     if(currentPlayer === "p1"){
       return currentPlayer = "p2"
-<<<<<<< HEAD
-    } else {
-=======
     }else if (currentPlayer === "p2"){
->>>>>>> 936d05820dd10d072be66014d5edf21c116cbe0e
       return currentPlayer = "p1"
     }
   }
 
   handleGamePlay = (index) => {
-<<<<<<< HEAD
-    var { squares, currentPlayer } = this.state
-    if(currentPlayer === "p1"){
-=======
     const { squares, currentPlayer } = this.state
     if(squares[index]=== null && currentPlayer === "p1"){
->>>>>>> 936d05820dd10d072be66014d5edf21c116cbe0e
       squares[index] = "❌"
       this.setState({squares: squares, currentPlayer: this.switchPlayer()})
     } else if (squares[index]=== null && currentPlayer === "p2"){
@@ -75,19 +66,10 @@ class App extends Component{
     if(squares === this.isWinO){
       alert("p2 wins")
     }
-<<<<<<< HEAD
-
-    
-  }
-
-  render(){
-    console.log("current player: ", this.state.currentPlayer)
-=======
   }
 
   render(){
     console.log("currentPlayer:", this.state.currentPlayer)
->>>>>>> 936d05820dd10d072be66014d5edf21c116cbe0e
     console.log(this.state.squares);
     return(
       <>
