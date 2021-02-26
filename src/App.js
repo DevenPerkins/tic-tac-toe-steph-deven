@@ -28,7 +28,7 @@ class App extends Component{
     [squares[0] === "❌"  && squares[4] === "❌" && squares[8] === "❌" ],
     [squares[2] === "❌"  && squares[4] === "❌" && squares[6] === "❌" ],
     ]
-  }
+  } 
 
   isWinO = () => {
   const {squares , o } = this.state
@@ -54,7 +54,7 @@ class App extends Component{
     }
   }
 
-
+// POOP FLAVORED ICE CREAM
 
 
   handleGamePlay = (index) => {
