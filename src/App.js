@@ -12,7 +12,7 @@ class App extends Component{
     }
   }
   
-  isWinX = () =>{
+  isWinX = () => {
   const {squares , x} = this.state
   const winCombosX = [
     [squares[0] === "❌"  && squares[1] === "❌" && squares[2] === "❌" ],
@@ -52,19 +52,26 @@ class App extends Component{
     }
   }
 
+  getCurrentPlayer = () => {
+    return this.state.currentPlayer;
+  }
+
+  getPlayerSymbol = (player) => {
+    if(player === "p1"){
+      return "❌";
+    } else {
+        return "🅾"
+    }
+  }
+
   handleGamePlay = (index) => {
     const { squares, currentPlayer } = this.state
-    if(squares[index]=== null && currentPlayer === "p1"){
-      squares[index] = "❌"
+    if(squares[index]=== null){
+      squares[index] = this.getPlayerSymbol(this.getCurrentPlayer())
       this.setState({squares: squares, currentPlayer: this.switchPlayer()})
-    } else if (squares[index]=== null && currentPlayer === "p2"){
-      squares[index] = "🅾️"
-      this.setState({squares: squares, currentPlayer: this.switchPlayer()})
-    }else if(squares[index] === "❌" || squares[index] === "🅾️" ){
-      alert("NO!")
-    }
-    if(squares === this.isWinO){
-      alert("p2 wins")
+
+    } else if(squares[index] === "❌" || squares[index] === "🅾️" ){
+      alert("NO!") 
     }
   }
 
