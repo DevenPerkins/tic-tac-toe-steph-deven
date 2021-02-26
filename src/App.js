@@ -8,42 +8,29 @@ class App extends Component{
     this.state = {
       squares: [null, null, null, null, null, null, null, null, null],
       history: [],
-      x: "x",
-      o: "o",
-      currentPlayer: "p1"
+      currentPlayer: "p1",
+      gameOver: false
     }
   }
   
-  isWinX = () =>{
-  const {squares , x} = this.state
-  const winCombosX = [
-    [squares[0] === "❌"  && squares[1] === "❌" && squares[2] === "❌" ],
-    [squares[3] === "❌"  && squares[4] === "❌" && squares[5] === "❌" ],
-    [squares[6] === "❌"  && squares[7] === "❌" && squares[8] === "❌" ],
+  isWin = (squares , player) => {
+  if 
+    ((squares[0] === this.getPlayerSymbol(player)  && squares[1] === this.getPlayerSymbol(player) && squares[2] === this.getPlayerSymbol(player)) ||
+    (squares[3] === this.getPlayerSymbol(player)  && squares[4] === this.getPlayerSymbol(player) && squares[5] === this.getPlayerSymbol(player)) ||
+    (squares[6] === this.getPlayerSymbol(player)  && squares[7] === this.getPlayerSymbol(player) && squares[8] === this.getPlayerSymbol(player)) ||
     
-    [squares[0] === "❌"  && squares[3] === "❌" && squares[6] === "❌" ],
-    [squares[1] === "❌"  && squares[4] === "❌" && squares[7] === "❌" ],
-    [squares[2] === "❌"  && squares[5] === "❌" && squares[8] === "❌" ],
+    (squares[0] === this.getPlayerSymbol(player)  && squares[3] === this.getPlayerSymbol(player) && squares[6] === this.getPlayerSymbol(player)) ||
+    (squares[1] === this.getPlayerSymbol(player)  && squares[4] === this.getPlayerSymbol(player) && squares[7] === this.getPlayerSymbol(player)) ||
+    (squares[2] === this.getPlayerSymbol(player)  && squares[5] === this.getPlayerSymbol(player) && squares[8] === this.getPlayerSymbol(player)) ||
 
-    [squares[0] === "❌"  && squares[4] === "❌" && squares[8] === "❌" ],
-    [squares[2] === "❌"  && squares[4] === "❌" && squares[6] === "❌" ],
-    ]
+    (squares[0] === this.getPlayerSymbol(player)  && squares[4] === this.getPlayerSymbol(player) && squares[8] === this.getPlayerSymbol(player)) ||
+    (squares[2] === this.getPlayerSymbol(player)  && squares[4] === this.getPlayerSymbol(player) && squares[6] === this.getPlayerSymbol(player))){
+      return true
+    }else{
+      return false
+    }
   } 
 
-  isWinO = () => {
-  const {squares , o } = this.state
-  const winCombosO = [
-    [squares[0] === "🅾️"  && squares[1] === "🅾️" && squares[2] === "🅾️" ],
-    [squares[3] === "🅾️"  && squares[7] === "🅾️" && squares[8] === "🅾️" ],
-    
-    [squares[0] === "🅾️"  && squares[3] === "🅾️" && squares[6] === "🅾️" ],
-    [squares[1] === "🅾️"  && squares[4] === "🅾️" && squares[7] === "🅾️" ],
-    [squares[2] === "🅾️"  && squares[5] === "🅾️" && squares[8] === "🅾️" ],
-  
-    [squares[0] === "🅾️"  && squares[4] === "🅾️" && squares[8] === "🅾️" ],
-    [squares[2] === "🅾️"  && squares[4] === "🅾️" && squares[6] === "🅾️" ],
-    ]
-  }
 
   switchPlayer = () => {
     var { currentPlayer } = this.state;
@@ -54,22 +41,28 @@ class App extends Component{
     }
   }
 
-// POOP FLAVORED ICE CREAM
+  getCurrentPlayer = () => {
+    return this.state.currentPlayer;
+  }
 
+  getPlayerSymbol = (player) => {
+    if(player === "p1"){
+      return "❌";
+    } else {
+        return "🅾"
+    }
+  }
 
   handleGamePlay = (index) => {
     const { squares, currentPlayer } = this.state
-    if(squares[index]=== null && currentPlayer === "p1"){
-      squares[index] = "❌"
+    if(squares[index]=== null){
+      squares[index] = this.getPlayerSymbol(this.getCurrentPlayer())
       this.setState({squares: squares, currentPlayer: this.switchPlayer()})
-    } else if (squares[index]=== null && currentPlayer === "p2"){
-      squares[index] = "🅾️"
-      this.setState({squares: squares, currentPlayer: this.switchPlayer()})
+      if(this.isWin(squares, this.getCurrentPlayer()) === true ){
+        this.setState({gameOver:"win"})
+      }
     }else if(squares[index] === "❌" || squares[index] === "🅾️" ){
-      alert("NO!")
-    }
-    if(squares === this.isWinO){
-      alert("p2 wins")
+      alert("NO!") 
     }
   }
 
@@ -91,7 +84,10 @@ class App extends Component{
             )
           })}
         </div>
-        
+        {
+          this.state.gameOver &&
+          <p className= "message">{`${this.getCurrentPlayer()} has won`}</p>
+        }
       </>
     )
   }
